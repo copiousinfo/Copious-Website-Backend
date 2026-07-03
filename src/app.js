@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import logger from './utils/logger.utils.js'
 import contactRoutes from './routes/contact.route.js'
+import healthRoutes from "./routes/healthcheck.route.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use("/api/v1/health", healthRoutes);
 app.use("/api/v1/usercreate", contactRoutes);
 
 // Health check
