@@ -1,25 +1,23 @@
 import winston from "winston";
 
-const { combine, timestamp, printf, colorize, errors } = winston.format;
-
-const logFormat = printf(({ level, message, timestamp, stack }) => {
-  return `${timestamp} [${level}]: ${stack || message}`;
-});
-
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
-  format: combine(
-    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    errors({ stack: true }),
-    logFormat,
+  level: "info", // Captures info, warn, and error
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json(),
   ),
   transports: [
+    // 1. Keep your file logging (visible in File Manager)
+    new winston.transports.File({ filename: "console.log", level: "info" }),
+    new winston.transports.File({ filename: "strerror.log", level: "error" }),
+
+    // 2. ADD THIS LINE: Sends logs to Hostinger's Runtime Log Panel
     new winston.transports.Console({
-      format: combine(colorize(), timestamp(), logFormat),
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple(),
+      ),
     }),
-    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
-    new winston.transports.File({ filename: "logs/combined.log" }),
   ],
 });
-
 export default logger;

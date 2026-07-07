@@ -1,0 +1,8 @@
+{"level":"info","message":"MongoDB connected: ac-pte76yf-shard-00-01.l1b7zuu.mongodb.net","timestamp":"2026-07-07T08:58:53.124Z"}
+{"level":"info","message":"Server running on port 4000","timestamp":"2026-07-07T08:58:53.129Z"}
+{"level":"info","message":"SMTP Server is ready","timestamp":"2026-07-07T08:58:53.882Z"}
+{"code":"EDNS","command":"CONN","errno":-3008,"hostname":"smtp.hostinger.com","level":"error","message":"SMTP verify error:  getaddrinfo ENOTFOUND smtp.hostinger.com","stack":"Error: getaddrinfo ENOTFOUND smtp.hostinger.com\n    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)","syscall":"getaddrinfo","timestamp":"2026-07-07T09:11:08.820Z"}
+{"level":"error","message":"MongoDB connection failed: querySrv ETIMEOUT _mongodb._tcp.cluster0.l1b7zuu.mongodb.net","timestamp":"2026-07-07T09:12:38.945Z"}
+{"level":"info","message":"MongoDB connected: ac-pte76yf-shard-00-01.l1b7zuu.mongodb.net","timestamp":"2026-07-07T09:13:27.536Z"}
+{"level":"info","message":"Server running on port 4000","timestamp":"2026-07-07T09:13:27.544Z"}
+{"level":"info","message":"SMTP Server is ready","timestamp":"2026-07-07T09:13:27.666Z"}

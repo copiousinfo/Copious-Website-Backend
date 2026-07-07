@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import logger from "./logger.utils.js";
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT) || 587,
   secure: process.env.SMTP_SECURE === "true",
@@ -9,6 +9,15 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+});
+
+// temporary debugging
+transporter.verify((error, success) => {
+  if (error) {
+    logger.error("SMTP verify error: ", error);
+  } else {
+    logger.info("SMTP Server is ready");
+  }
 });
 
 export const sendMail = async ({ to, subject, html }) => {
