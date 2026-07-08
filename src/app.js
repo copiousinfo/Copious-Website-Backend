@@ -1,10 +1,14 @@
 import express from "express";
 import cors from "cors";
-import logger from './utils/logger.utils.js'
-import contactRoutes from './routes/contact.route.js'
+import path from "path";
+import { fileURLToPath } from "url";
+import logger from "./utils/logger.utils.js";
+import contactRoutes from "./routes/contact.route.js";
 import healthRoutes from "./routes/healthcheck.route.js";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // CORS should be one of the first middlewares — before body parsers/routes
 app.use(
@@ -21,9 +25,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/health", healthRoutes);
 app.use("/api/v1/usercreate", contactRoutes);
 
+// serve react build
+app.use(express.static(path.join(__dirname, "../public")));
+
 // Health check
-app.get("/", (req, res) => {
-  res.status(200).json({ success: true, message: "API is running" });
+// app.get("/", (req, res) => {
+//   res.status(200).json({ success: true, message: "API is running" });
+// });
+
+app.get("/{*any}", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 // 404 handler
