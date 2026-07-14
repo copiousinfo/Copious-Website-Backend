@@ -33,7 +33,11 @@ app.use(express.static(path.join(__dirname, "../public")));
 //   res.status(200).json({ success: true, message: "API is running" });
 // });
 
-app.get("/{*any}", (req, res) => {
+app.get("/{*any}", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
